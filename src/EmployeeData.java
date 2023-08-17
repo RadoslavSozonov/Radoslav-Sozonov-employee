@@ -16,9 +16,17 @@ public class EmployeeData {
     private Date dateFrom;
     private Date dateTo;
 
+    /**
+     * If the dateTo is before dateFrom throw error
+     * @param empId
+     * @param projectId
+     * @param dateFrom
+     * @param dateTo
+     * @throws DateToBeforeDateFromException
+     */
     public EmployeeData(long empId, long projectId, Date dateFrom, Date dateTo) throws DateToBeforeDateFromException {
-        if(dateFrom.before(dateFrom)){
-            throw new DateToBeforeDateFromException("%1$s is not before %2$s".formatted(dateTo, dateFrom));
+        if(dateTo.before(dateFrom)){
+            throw new DateToBeforeDateFromException("DateTo %1$s is before DateFrom %2$s".formatted(dateTo, dateFrom));
         }
         this.empId = empId;
         this.projectId = projectId;

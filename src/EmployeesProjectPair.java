@@ -18,9 +18,18 @@ public class EmployeesProjectPair {
 
     @Override
     public String toString(){
+        if(employee1 == 0){
+            return "No pair found";
+        }
         return String.format("%1$s, %2$s, %3$s", employee1, employee2, projectID);
     }
 
+    /**
+     * Calculates the period of overlapping days
+     * @param employeeData1
+     * @param employeeData2
+     * @return - the period of days
+     */
     public static long calculateDay(EmployeeData employeeData1, EmployeeData employeeData2) {
         Date period1Start = employeeData1.getDateFrom();
         Date period1End = employeeData1.getDateTo();
@@ -28,6 +37,7 @@ public class EmployeesProjectPair {
         Date period2Start = employeeData2.getDateFrom();
         Date period2End = employeeData2.getDateTo();
 
+        //check if the two time periods overlap
         if(!(period1Start.before(period2End) && period2Start.before(period1End))){
             return 0;
         }
@@ -42,6 +52,11 @@ public class EmployeesProjectPair {
         ) + 1;
     }
 
+    /**
+     * Convert Date type to LocalDate type
+     * @param dateToConvert - the date to convert
+     * @return - the converted date to localdate type
+     */
     private static LocalDate dateToLocalDateConverter(Date dateToConvert){
         return LocalDate.parse(dateToConvert.toString(), DateTimeFormatter.ofPattern("[yyyy-MM-dd]"));
     }

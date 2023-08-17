@@ -13,6 +13,13 @@ import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 public class Main {
+
+    /**
+     * Parse the CSV data
+     * Compute the employee pair worked longest on a project
+     * Print all projects the computed pair has worked on together
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String fileLocation = scanner.nextLine();
@@ -32,6 +39,12 @@ public class Main {
         }
     }
 
+    /**
+     * Parse the CSV data EmployeeData objects and
+     * put them in EmployeeProjectManager
+     * @param fileLocation - the location of the file
+     * @return the EmployeeProjectManager
+     */
     public static EmployeeProjectManager parseCSVData(String fileLocation) {
 
         EmployeeProjectManager employeeProjectManager = new EmployeeProjectManager();
@@ -57,6 +70,12 @@ public class Main {
         return employeeProjectManager;
     }
 
+    /**
+     * Convert the date string to Date type
+     * @param date - the string
+     * @return - the Date type
+     * @throws DataFormatException
+     */
     public static Date convertDate(String date) throws DataFormatException {
         date = date.trim();
         String datePattern = formatCreator(date);
@@ -66,8 +85,14 @@ public class Main {
         return Date.valueOf(LocalDate.parse(date, dateTimeFormatter));
     }
 
+    /**
+     * Divide the date string based on the symbol between its year, month and day values
+     * and calls formatBuilder to get the date pattern
+     * @param date - the date string
+     * @return - return the date pattern
+     * @throws DataFormatException
+     */
     public static String formatCreator(String date) throws DataFormatException {
-
         if(date.contains("-")){
             return formatBuilder("-", date.split("-"));
         }
@@ -83,6 +108,12 @@ public class Main {
         throw new DataFormatException("Not in Existence Date Format Provided for value: " + date);
     }
 
+    /**
+     * This function constructs the pattern necessary to parse the date
+     * @param delimiter - the delimiter symbols between the year, month and day
+     * @param values - the date divided based on its delimiter
+     * @return - the date pattern used to parse
+     */
     public static String formatBuilder(String delimiter, String[] values){
         StringBuilder format = new StringBuilder();
 
@@ -116,6 +147,12 @@ public class Main {
         return format.toString();
     }
 
+    /**
+     * Check if the string is number and is possible
+     * to parse to Long
+     * @param strNum - the string to check
+     * @return true if possible, else false
+     */
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
@@ -128,6 +165,12 @@ public class Main {
         return true;
     }
 
+    /**
+     * Clean the string from characters, for example the first string of the csv
+     * file is containing some strange values, if it is 1, then its bytes are [-1, -2, 50, 0]
+     * @param str - the string to clean
+     * @return the bytes' values above 0
+     */
     public static String cleanString(String str){
         StringBuilder newStr = new StringBuilder();
         for(byte byteValue: str.trim().getBytes(StandardCharsets.UTF_8)){
