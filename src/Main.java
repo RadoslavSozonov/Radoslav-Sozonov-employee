@@ -21,6 +21,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.print("Provide the path to the CSV file: ");
         Scanner scanner = new Scanner(System.in);
         String fileLocation = scanner.nextLine();
         EmployeeProjectManager employeeProjectManager = null;
