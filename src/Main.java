@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,10 +22,16 @@ public class Main {
      * Print all projects the computed pair has worked on together
      * @param args
      */
+    Main object = this;
     public static void main(String[] args) {
-        System.out.print("Provide the path to the CSV file: ");
-        Scanner scanner = new Scanner(System.in);
-        String fileLocation = scanner.nextLine();
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Open Resource File");
+//        fileChooser.showOpenDialog(stage);
+        String fileLocation = new WindowOpener().openWindow();
+
+//        System.out.print("Provide the path to the CSV file: ");
+//        Scanner scanner = new Scanner(System.in);
+//        scanner.nextLine();
         EmployeeProjectManager employeeProjectManager = null;
         LongestEmployeeProjectCollaboration longestEmployeeProjectCollaboration;
         try {
